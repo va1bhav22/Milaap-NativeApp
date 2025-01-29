@@ -1,19 +1,14 @@
 import React, {useState} from 'react';
 import {
-  FlatList,
-  Text,
-  View,
-  StyleSheet,
-  TouchableOpacity,
   ActivityIndicator,
-  Alert,
+  FlatList,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 
-import EvilIcons from 'react-native-vector-icons/EvilIcons'; // For IoPersonCircle
-import FontAwesome from 'react-native-vector-icons/FontAwesome'; // For FaCircleInfo
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons'; // For MdDelete
-import Feather from 'react-native-vector-icons/Feather'; // For FiPhoneCall
-import LinearGradient from 'react-native-linear-gradient';
 interface Contact {
   name: string;
   phone: string;
@@ -68,14 +63,17 @@ const App = () => {
         </View>
         <View style={styles.contactMenus}>
           <Text style={styles.contactName}>{item.name}</Text>
-          <Text style={styles.contactPhone}>
-            {/* <FiPhoneCall size={16} /> */}
-            +91 - {item.phone}
-          </Text>
+          <View style={styles.contactPhone}>
+            <Image source={require('./assets/call.png')} style={styles.icon} />
+            <Text> +91 - {item.phone}</Text>
+          </View>
         </View>
       </View>
       <TouchableOpacity>
-        {/* <MdDelete size={24} color="#9d3352" /> */}
+        <Image
+          source={require('./assets/delete-removebg-preview.png')}
+          style={styles.icon}
+        />
       </TouchableOpacity>
     </View>
   );
@@ -91,13 +89,14 @@ const App = () => {
     <View style={styles.container}>
       <View style={styles.header}>
         <View style={styles.headerLeft}>
-          {/* <IoPersonCircle size={29} color="#9d3352" /> */}
-          <EvilIcons name="user" size={50} color="blue" />
-          {/* <Icon name="person-circle" size={30} color="#9d3352" /> */}
+          {/* <EvilIcons name="user" size={32} color="#9d3352" /> */}
+          <Image
+            source={require('./assets/images-removebg-preview.png')}
+            style={styles.logo}
+          />
           <Text style={styles.headerTitle}>Team Members</Text>
         </View>
-        {/* <FaCircleInfo size={24} color="#9d3352" /> */}
-        <FontAwesome name="info-circle" size={50} color="green" />
+        <Image source={require('./assets/info.png')} style={styles.logo} />
       </View>
 
       <FlatList
@@ -134,17 +133,26 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
+
+  logo: {
+    height: 30,
+    width: 30,
+  },
+  icon: {
+    height: 25,
+    width: 25,
+  },
   headerTitle: {
     marginLeft: 10,
     fontSize: 18,
     fontWeight: 'bold',
   },
   card: {
+    padding: 15,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: '#fff',
-    padding: 15,
     marginHorizontal: 10,
     marginVertical: 5,
     borderRadius: 8,
@@ -183,8 +191,9 @@ const styles = StyleSheet.create({
   contactPhone: {
     color: '#555',
     display: 'flex',
-    gap: 7,
-    alignItems: 'center',
+    flexDirection: 'row',
+    gap: 2,
+    // alignItems: 'center',
   },
   loaderContainer: {
     paddingVertical: 20,
